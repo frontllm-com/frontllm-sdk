@@ -2,7 +2,7 @@
 
 # FrontLLM
 
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ffrontllm-com%2Ffrontllm-sdk%2Fbadge%3Fref%3Dmain&style=flat-square)](https://actions-badge.atrox.dev/frontllm/frontllm-sdk/goto?ref=main) [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](/LICENSE) [![View this project on NPM](https://img.shields.io/npm/v/frontllm.svg?style=flat-square)](https://npmjs.org/package/frontllm)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ffrontllm-com%2Ffrontllm-sdk%2Fbadge%3Fref%3Dmain&style=flat-square)](https://actions-badge.atrox.dev/frontllm-com/frontllm-sdk/goto?ref=main) [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](/LICENSE) [![View this project on NPM](https://img.shields.io/npm/v/frontllm.svg?style=flat-square)](https://npmjs.org/package/frontllm)
 
 FrontLLM is your safe front-end gateway to LLMs. Request LLM directly from your front-end code. No backend needed. FrontLLM supports rate limiting, usage tracking, and more. It works with any front-end framework, including React, Vue, and Angular.
 
