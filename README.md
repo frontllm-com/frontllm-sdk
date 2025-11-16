@@ -8,6 +8,11 @@ FrontLLM is your safe front-end gateway to LLMs. Request LLM directly from your 
 
 📝 Check [our website](https://frontllm.com) for more details.
 
+## 👀 Live Demos
+
+* [🪟 CodeMirror AI Autocomplete Demo](https://frontllm-com.github.io/frontllm-sdk/webpack-app/codemirror-autocomplete.html)
+* [🇲🇨 Monaco Editor AI Autocomplete Demo](https://frontllm-com.github.io/frontllm-sdk/webpack-app/monaco-editor-autocomplete.html)
+
 ## 🚀 Installation
 
 ### NPM
