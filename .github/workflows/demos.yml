@@ -39,7 +39,7 @@ jobs:
       - name: Prepare
         run: |
             mkdir _deploy
-            cp -R demos/webpack-app/public _deploy
+            cp -R demos/webpack-app/public/* _deploy/webpack-app/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
