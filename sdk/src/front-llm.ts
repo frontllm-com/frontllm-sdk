@@ -58,12 +58,19 @@ export class FrontLLM {
 			})
 		};
 		const timeout = options?.timeout ?? this.configuration.timeout;
-		if (timeout !== undefined) {
-			init.signal = AbortSignal.timeout(timeout);
+
+		let signal: AbortSignal | undefined = undefined;
+		if (timeout) {
+			signal = AbortSignal.timeout(timeout);
 		}
 		if (options?.abortSignal) {
-			init.signal = options.abortSignal;
+			if (signal) {
+				signal = AbortSignal.any([signal, options.abortSignal]);
+			} else {
+				signal = options.abortSignal;
+			}
 		}
+		init.signal = signal;
 		if (this.configuration.headers) {
 			Object.assign(headers, this.configuration.headers);
 		}

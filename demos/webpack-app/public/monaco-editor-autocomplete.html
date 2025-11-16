@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>🇲🇨 Monaco Editor AI Suggestions Demo - FrontLLM</title>
+		<link rel="shortcut icon" href="./assets/favicon.ico" />
+		<link rel="shortcut icon" href="./assets/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<link rel="stylesheet" href="./assets/common.css" />
+		<style>
+			#placeholder {
+				width: 100%;
+				height: 50vh;
+				border: 1px solid #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<header id="header">
+			<div id="head">
+				<div class="info">
+					<h1>🇲🇨 Monaco Editor AI Autocomplete Demo</h1>
+					<p>In this demo you can see how to integrate FrontLLM's AI autocomplete capabilities into a Monaco Editor instance.</p>
+					<p>
+						Dependencies used in this demo:
+						<a href="https://www.npmjs.com/package/monaco-editor" target="_blank">monaco-editor</a>,
+						<a href="https://www.npmjs.com/package/monacopilot">monacopilot</a>,
+						<a href="https://www.npmjs.com/package/frontllm">frontllm</a>
+					</p>
+				</div>
+
+				<div class="links">
+					<a href="https://frontllm.com" target="_blank">FrontLLM</a>
+					<a href="https://github.com/frontllm-com/frontllm-sdk/tree/main/demos" target="_blank">View Source</a>
+				</div>
+			</div>
+			<div id="debug-bar">
+				<div id="tracer"></div>
+				<div id="gateway-form">
+					<label>Use own Gateway ID</label>
+					<input type="text" id="gateway-id-input" value="" placeholder="If empty, it uses the public one" />
+				</div>
+			</div>
+		</header>
+		<main id="main">
+			<div id="placeholder"></div>
+			<script src="./build/monaco-editor-autocomplete.js"></script>
+		</main>
+	</body>
+</html>
