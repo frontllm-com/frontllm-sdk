@@ -103,7 +103,6 @@ function main() {
 							abortSignal: abortController.signal
 						});
 						const newText = extractResponse(response) ?? oldText;
-						console.log(extractResponse(response))
 						demo.trace(
 							'success',
 							`Received autocomplete response, ${response.usage.total_tokens} tokens used, in ${stopwatch.stop()}s`
