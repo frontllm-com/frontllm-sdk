@@ -41,10 +41,10 @@ export class FrontLLM {
 	}
 
 	private getBaseUrl(): string {
-		return (this.configuration.baseUrl ?? BASE_URL) + `/api/gateways/${this.gatewayId}`;
+		return (this.configuration.baseUrl ?? BASE_URL) + `/api/gateway`;
 	}
 
-	private async createCompletion(url: string, payload: unknown, options: FrontLLMClientOptions | undefined) {
+	private async createCompletion(url: string, payload: object, options: FrontLLMClientOptions | undefined) {
 		const headers: Record<string, string> = {
 			'Content-Type': 'application/json'
 		};
@@ -52,7 +52,10 @@ export class FrontLLM {
 			method: 'POST',
 			mode: 'cors',
 			headers,
-			body: JSON.stringify(payload)
+			body: JSON.stringify({
+				gateway_id: this.gatewayId,
+				...payload
+			})
 		};
 		const timeout = options?.timeout ?? this.configuration.timeout;
 		if (timeout !== undefined) {

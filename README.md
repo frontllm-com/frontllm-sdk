@@ -30,7 +30,7 @@ const gateway = frontLLM('<gateway_id>');
 To use FrontLLM via CDN, you can include the following script tag in your HTML file:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/frontllm@0.1.5/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/frontllm@0.2.0/dist/index.umd.js"></script>
 ```
 
 This will expose the `frontLLM` function globally, which you can use to create an instance of the gateway:
