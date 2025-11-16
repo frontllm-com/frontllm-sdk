@@ -18,15 +18,45 @@ function createRequest(oldText: string): CreateBaseChatCompletionRequest {
 		messages: [
 			{
 				role: 'system',
-				content:
-					'You are a code completion assistant and your task is to analyze user edits and then rewrite the marked region, taking into account the cursor location. ' +
-					'The cursor will be indicated by the special token <|user_cursor_is_here|>. The content of user will begin with <|user_edit_start|> and end with <|user_edit_end|>. ' +
-					'Please suggest code only AFTER the <|user_cursor_is_here|> token. Please return the full user content between <|user_edit_start|> and <|user_edit_end|> with your suggestions incorporated. ' +
-					'Please preserve all indentation and formatting and the <|user_cursor_is_here|> token in the same location as in the original content. Please add suggestions ONLY after the <|user_cursor_is_here|> token.'
+				content: `You are a code completion assistant. Your job is to rewrite the marked region of user content, respecting the cursor location.
+
+#### 🔍 Markers:
+- Editable content is wrapped in:
+  \`<|USER_CONTENT_START|>\`
+  ...
+  \`<|USER_CONTENT_END|>\`
+
+- The cursor is marked using the **exact token**:
+  \`<|user_cursor_is_here|>\`
+
+#### 🚫 Forbidden actions (do **NOT** do these):
+1. ❌ **Do NOT move, delete, replace, or duplicate** the \`<|user_cursor_is_here|>\` token.
+2. ❌ Do NOT add any text **before or on the same line as** the cursor.
+3. ❌ Do NOT change or reformat any text **before** the cursor.
+
+If any of these are violated: **return the content exactly as-is**, unchanged.
+
+#### ✅ What you MUST do:
+- Add code suggestions *only after* the \`<|user_cursor_is_here|>\` token.
+- Preserve all formatting, indentation, line breaks, and spacing.
+- Return only the content between \`<|USER_CONTENT_START|>\` and \`<|USER_CONTENT_END|>\` with your changes.
+
+#### 🧱 Example:
+
+User input:
+\`\`\`ts
+<|USER_CONTENT_START|>hello<|user_cursor_is_here|><|USER_CONTENT_END|>
+\`\`\`
+
+Correct response:
+\`\`\`ts
+<|USER_CONTENT_START|>hello<|user_cursor_is_here|>world!<|USER_CONTENT_END|>
+\`\`\`
+`
 			},
 			{
 				role: 'user',
-				content: `Please complete this text:\n<|user_edit_start|>${oldText}<|user_edit_end|>`
+				content: `Please complete this text:\n<|USER_CONTENT_START|>${oldText}<|USER_CONTENT_END|>`
 			}
 		]
 	};
@@ -34,12 +64,12 @@ function createRequest(oldText: string): CreateBaseChatCompletionRequest {
 
 function extractResponse(response: CreateNonStreamingChatCompletionResponse): string | null {
 	const content = response.choices[0].message.content;
-	const startPos = content.indexOf('<|user_edit_start|>');
-	const endPos = content.indexOf('<|user_edit_end|>');
+	const startPos = content.indexOf('<|USER_CONTENT_START|>');
+	const endPos = content.indexOf('<|USER_CONTENT_END|>');
 	if (startPos === -1 || endPos === -1 || endPos <= startPos) {
 		return null;
 	}
-	return content.slice(startPos + '<|user_edit_start|>'.length, endPos);
+	return content.slice(startPos + '<|USER_CONTENT_START|>'.length, endPos);
 }
 
 let abortController: AbortController | null = null;
@@ -73,7 +103,7 @@ function main() {
 							abortSignal: abortController.signal
 						});
 						const newText = extractResponse(response) ?? oldText;
-
+						console.log(extractResponse(response))
 						demo.trace(
 							'success',
 							`Received autocomplete response, ${response.usage.total_tokens} tokens used, in ${stopwatch.stop()}s`

@@ -57,7 +57,6 @@ User input:
 \`\`\`
 
 Correct response:
-
 \`\`\`ts
 <|USER_CONTENT_START|>hello<|user_cursor_is_here|>world!<|USER_CONTENT_END|>
 \`\`\`
