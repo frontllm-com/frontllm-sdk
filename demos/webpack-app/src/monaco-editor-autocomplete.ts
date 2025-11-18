@@ -52,12 +52,12 @@ If any of these are violated: **return the content exactly as-is**, unchanged.
 #### 🧱 Example:
 
 User input:
-\`\`\`ts
+\`\`\`
 <|USER_CONTENT_START|>hello<|user_cursor_is_here|><|USER_CONTENT_END|>
 \`\`\`
 
 Correct response:
-\`\`\`ts
+\`\`\`
 <|USER_CONTENT_START|>hello<|user_cursor_is_here|>world!<|USER_CONTENT_END|>
 \`\`\`
 `
